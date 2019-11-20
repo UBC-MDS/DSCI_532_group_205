@@ -1,2 +1,2 @@
 # DSCI_532_group_205
-Movies Dashboard (Python)
+Movies Dashboard in Python
