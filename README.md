@@ -5,4 +5,4 @@ Movies Dashboard in Python
 ## Description of the app
 
 ## Sketch of the app
-!["sketch"](img/sketch.jpg)
+!["sketch"](img/app_sketch.png) 
