@@ -6,7 +6,7 @@ TBA
 
 ## Description of the Data
 
-This "movies" dataset is from the [Vega Datasets][1] collection. There are movies from 1920 to 2016. Financial information includes US & worldwide gross income, US DVD sales and production budget. Movies are categorized by a single `Major_Genre` (e.g. Action, Comedy), a `Creative_Type` (e.g. Fantasy, Super Hero) and an `MPAA_Rating` which are [ratings by the Motion Picture Association of America][2] (e.g. G, PG, R). There are up to two ratings per movie in the variables `Rotten_Tomatoes_Rating` and `IMDB_Rating`. Other metadata include `Title`, `Release_Date`, `Director` and `Distributor`.
+This "movies" dataset is from the [Vega Datasets][1] collection. There are about 3200 movies with release years between 1920 to 2016. For each movie, we have different types of information available, starting from basic information (`Title`, `Major_Genre`, `Release_Date`, `Running_Time_min`, `Director`) to some miscellaneous data (`Distributor`, `Creative_Type`, `Source`). Financial information includes US & worldwide gross income, US DVD sales and production budget. Movies are categorized by a single `Major_Genre` (e.g. Action, Comedy), a `Creative_Type` (e.g. Fantasy, Super Hero) and an `MPAA_Rating` which are [ratings by the Motion Picture Association of America][2] (e.g. G, PG, R). There are up to two ratings per movie in the variables `Rotten_Tomatoes_Rating` and `IMDB_Rating`.
 
 ## Research Questions and Usage Scenarios
 
