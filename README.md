@@ -1,5 +1,6 @@
 # DSCI_532_group_205
-Movies Dashboard in Python  
+### Seek A Movie  
+A movie selection dashboard built in Python using Plotly-Dash  
 
 ## Description of the app
 `Seek A Movie` is a web application designed to help users select top grossing US movies to watch based on their preferences. Using the graphical user interfase on the left, the user can select various options to filter movies and the app will select the best movies to watch based on total gross revenue. The first component is a checkbox that allows the user to select one or more of the different genres available. The second component is also a checkbox that can be used to select the various MPAA ratings. The final component is a range slider that can be used to select a range of release years for the movie.   
