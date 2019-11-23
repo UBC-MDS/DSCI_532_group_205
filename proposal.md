@@ -10,7 +10,14 @@ This "movies" dataset is from the [Vega Datasets][1] collection. There are movie
 
 ## Research Questions and Usage Scenarios
 
-TBA
+- What are the top US grossing movies based on genre, MPAA rating and release year range?
+- How do these movies rate among other movies (in the dataset)?
+
+Bob is an avid movie watcher and would like to discover past movies that he may have missed or re-discover movies that he's enjoyed in the past. He wants an easy way to narrow down the vast selection of movies available so he can spend more time watching movies as opposed to searching for them.
+
+When Bob uses this "Seek-a-Movie" app, he'll be presented with two charts and some filter controls. The main chart will be interactive and will display the top movies by US gross income, filtered by all the user filter controls. The secondary chart, a scatter plot, displays Rotten Tomatoes ratings vs. IMBD ratings for the entire database. The ratings for the top movies listed in the first chart will be highlighted. This allows bob to visualize where the ratings for the filtered movie selection fall among all other ratings.
+
+The filter controls allow Bob to filter movies by genre, MPAA rating and release year. Hovering over a movie will display associated meta data and selecting a movie will highlight its rating. This allows for easy discovery of movies.
 
 [1]: https://github.com/vega/vega-datasets
 [2]: https://en.wikipedia.org/wiki/Motion_Picture_Association_of_America_film_rating_system
