@@ -1,10 +1,27 @@
 import altair as alt
 from src import theme
 
-#
-# Create the upper chart
-#
 def create_upper_chart(df, genres, ratings, year_from, year_to):
+    """Create upper chart.
+
+    Parameters
+    ----------
+    df : DataFrame
+       Source data
+    genres : list
+       List of genres
+    ratings : list
+       List of MPAA ratings
+    year_from : string
+       Starting year
+    year_to : string
+       Ending year
+
+    Returns
+    -------
+    Chart :
+        Altair chart
+    """
     # register the custom theme under a chosen name
     alt.themes.register('mds_special', theme.mds_special)
 

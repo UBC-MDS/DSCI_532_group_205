@@ -1,4 +1,5 @@
 def mds_special():
+    """Altair Theme for the UBC MDS Program"""
     font = "Arial"
     axisColor = "#000000"
     gridColor = "#DEDDDD"
