@@ -6,6 +6,9 @@ import vega_datasets
 import pandas as pd
 
 from dash.dependencies import Input, Output
+from src import theme
+from src import lower_chart
+from src import upper_chart
 
 
 app = dash.Dash(__name__, assets_folder='assets')
@@ -36,17 +39,6 @@ genres = sorted(list(df["Major_Genre"].dropna().unique()))
 ratings = ["G", "PG", "PG-13", "R", "NC-17", "Open", "None"]
 years = sorted(list(df["Release_Year"].dropna().astype(str).unique()))
 
-#
-# Create the upper chart
-#
-def create_upper_chart(genres, ratings, year_from, year_to):
-    return "this is a test"
-
-#
-# Create the lower chart
-#
-def create_lower_chart(genres, ratings, year_from, year_to):
-    return "this is a test"
 
 #
 # App layout
@@ -128,8 +120,8 @@ app.layout = html.Div([
                dash.dependencies.Input("dd-year-from", "value"),
                dash.dependencies.Input("dd-year-to", "value")])
 def update_charts(genre, rating, year_from, year_to):
-    return (create_upper_chart(genre, rating, year_from, year_to),
-            create_lower_chart(genre, rating, year_from, year_to))
+    return (upper_chart.create_upper_chart(genre, rating, year_from, year_to),
+            lower_chart.create_lower_chart(genre, rating, year_from, year_to))
 
 if __name__ == '__main__':
     app.run_server(debug=True)
