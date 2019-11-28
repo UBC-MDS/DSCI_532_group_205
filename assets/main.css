@@ -20,6 +20,9 @@ body {
     font-style: italic;
 }
 
+.app-main--cb-input {
+    margin-right: 0.5em;
+}
 
 P {
     margin-block-start: 0.5em;
@@ -47,13 +50,11 @@ P {
 
 .app-main--panel-right-upper {
     flex: 1;
-    background-color: pink;
     padding: 10px;
 }
 
 .app-main--panel-right-lower {
     flex: 1;
-    background-color: cyan;
     padding: 10px;
 }
 

@@ -6,7 +6,6 @@ import vega_datasets
 import pandas as pd
 
 from dash.dependencies import Input, Output
-from src import theme
 from src import lower_chart
 from src import upper_chart
 
@@ -95,7 +94,7 @@ app.layout = html.Div([
                             id="chart_upper",
                             height="100%",
                             width="100%",
-                            style={"border-width": "0", "background-color": "pink"},
+                            className="upper-chart--iframe",
                             srcDoc="")
             ], className="app-main--panel-right-upper"),
             html.Div([
@@ -103,7 +102,7 @@ app.layout = html.Div([
                             id="chart_lower",
                             height="100%",
                             width="100%",
-                            style={"border-width": "0", "background-color": "cyan"},
+                            className="lower-chart--iframe",
                             srcDoc="")
             ], className="app-main--panel-right-lower")
         ], className="app-main--panel-right")
@@ -120,8 +119,8 @@ app.layout = html.Div([
                dash.dependencies.Input("dd-year-from", "value"),
                dash.dependencies.Input("dd-year-to", "value")])
 def update_charts(genre, rating, year_from, year_to):
-    return (upper_chart.create_upper_chart(genre, rating, year_from, year_to),
-            lower_chart.create_lower_chart(genre, rating, year_from, year_to))
+    return (upper_chart.create_upper_chart(df, genre, rating, year_from, year_to).to_html(),
+            lower_chart.create_lower_chart(df, genre, rating, year_from, year_to).to_html())
 
 if __name__ == '__main__':
     app.run_server(debug=True)
