@@ -1,6 +1,7 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import dash_bootstrap_components as dbc
 import altair as alt
 import vega_datasets
 import pandas as pd
@@ -43,7 +44,10 @@ years = sorted(list(df["Release_Year"].dropna().astype(str).unique()))
 # App layout
 #
 app.layout = html.Div([
-    html.H1("Seek-a-Movie"),
+    dbc.Jumbotron(
+        [html.H1("Seek-a-Movie", className="display-3", style={"background-color":"blue"})
+        ]
+    ),
     html.Div([
         html.Div([
             html.Div([
@@ -54,7 +58,7 @@ app.layout = html.Div([
                     inputClassName="app-main--cb-input",
                     labelClassName="app-main--cb-label",
                     options=[{"label": genre, "value": genre} for genre in genres],
-                    value=[]
+                    value=[ ]
                 )
             ], className="app-main--genre-container app-main--filter-panel"),
             html.Div([
