@@ -1,7 +1,8 @@
 import altair as alt
 from src import theme
 
-def create_lower_chart(df, genres, ratings, year_from, year_to):
+
+def create_lower_chart(df, pts, genres, ratings, year_from, year_to):
     """Create lower chart.
 
     Parameters
@@ -22,7 +23,7 @@ def create_lower_chart(df, genres, ratings, year_from, year_to):
     Chart :
         Altair chart
     """
-   
+
     # register the custom theme under a chosen name
     alt.themes.register('mds_special', theme.mds_special)
 
@@ -41,28 +42,24 @@ def create_lower_chart(df, genres, ratings, year_from, year_to):
     top_10 = top_us_gross_df.head(10).reset_index().drop(columns="index")
     top_10["rank"] = top_10.index + 1
 
-
     p1 = alt.Chart(df).mark_circle(opacity=0.4).encode(
-	    alt.X("IMDB_Rating:Q", title="IMDB Rating"),
-	    alt.Y("Rotten_Tomatoes_Rating:Q", title="Rotten Tomatoes Rating"),
-	     alt.Tooltip(["IMDB_Rating", "Rotten_Tomatoes_Rating"])).interactive().properties(
-	    title = "Movie Ratings",
-	    width=500,
-	    height=200)
 
-    p2 = alt.Chart(top_10).mark_circle(size = 200,
-                                  opacity=1).encode(
-	    alt.X("IMDB_Rating:Q"),
-	    alt.Y("Rotten_Tomatoes_Rating:Q"),
-	    alt.Color("Title:N", scale=alt.Scale(scheme="set3"), legend=None),
-	    alt.Tooltip(["IMDB_Rating", "Rotten_Tomatoes_Rating", "Title"])).interactive().properties(
-	    width=500,
-	    height=200)
+        alt.X("IMDB_Rating:Q", title="IMDB Rating"),
+        alt.Y("Rotten_Tomatoes_Rating:Q", title="Rotten Tomatoes Rating"),
+        alt.Tooltip(["IMDB_Rating", "Rotten_Tomatoes_Rating"])).interactive()
 
-    combined_scatter = (p1 + p2).configure_axis(
-                        titleFontSize = 20,
-                        ).configure_title(
-                        fontSize = 20,
-                        ).configure_legend(titleFontSize = 20, labelFontSize = 15, labelLimit=1000)
+    p2 = alt.Chart(top_10).mark_circle(size=200,
+                                       opacity=1).encode(
+        alt.X("IMDB_Rating:Q"),
+        alt.Y("Rotten_Tomatoes_Rating:Q"),
+        color=alt.condition(
+            pts,
+            alt.Color("Title:O", scale=alt.Scale(scheme="set1"), legend=None),
+            alt.ColorValue("grey")),
+        tooltip=alt.Tooltip(["IMDB_Rating", "Rotten_Tomatoes_Rating", "Title"])
+    ).interactive()
 
-    return  combined_scatter
+    combined_scatter = (p1 + p2).properties(
+        title="Movie Ratings")
+
+    return combined_scatter
