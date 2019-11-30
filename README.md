@@ -10,7 +10,7 @@ Based on the selection made by the user, the app will find the top 10 grossing U
 ## Sketch of the app
 !["sketch"](img/app_sketch.png) 
 
-## Link to the dployed app:  
+## Link to the deployed app:  
 https://dsci-532-group-205-milestone2.herokuapp.com/  
 
 ## Functionalities of the app  
