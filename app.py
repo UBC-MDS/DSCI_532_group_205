@@ -6,7 +6,6 @@ import altair as alt
 import vega_datasets
 import pandas as pd
 
-from dash.dependencies import Input, Output
 from src import lower_chart
 from src import upper_chart
 
@@ -15,6 +14,12 @@ server = app.server
 
 
 def get_data():
+    """Create wrangled dataset for charts
+    Returns
+    -------
+    DataFrame:
+        Pandas DataFrame with wrangled Movies data
+    """
     df = vega_datasets.data.movies()
 
     # Convert string dates to `datetime`
@@ -34,10 +39,10 @@ app.title = "Seek-a-Movie"
 #
 # Prepare movies DataFrame
 #
-df = get_data()
-genres = sorted(list(df["Major_Genre"].dropna().unique()))
+movies_df = get_data()
+genres = sorted(list(movies_df["Major_Genre"].dropna().unique()))
 ratings = ["G", "PG", "PG-13", "R", "NC-17", "Open", "None"]
-years = sorted(list(df["Release_Year"].dropna().astype(str).unique()))
+years = sorted(list(movies_df["Release_Year"].dropna().astype(str).unique()))
 
 #
 # Default values for filters
@@ -129,20 +134,21 @@ app.layout = html.Div([
                dash.dependencies.Input("dd-year-from", "value"),
                dash.dependencies.Input("dd-year-to", "value")])
 def update_charts(genre, rating, year_from, year_to):
-    upper_chart_rendered = upper_chart.create_upper_chart(df, pts, genre, rating, year_from, year_to)
-    lower_chart_rendered = lower_chart.create_lower_chart(df, pts, genre, rating, year_from, year_to)
-
-    upper_chart_rendered.properties(
-        width=350,
-        height=155
-    )
-
-    lower_chart_rendered.properties(
+    upper_chart_rendered = upper_chart.create_upper_chart(
+        movies_df, pts, genre, rating, year_from, year_to
+    ).properties(
         width=400,
-        height=200
+        height=250
     )
 
-    charts = alt.vconcat(upper_chart_rendered, lower_chart_rendered, center=True)
+    lower_chart_rendered = lower_chart.create_lower_chart(
+        movies_df, pts, genre, rating, year_from, year_to
+    ).properties(
+        width=400,
+        height=250
+    )
+
+    charts = alt.vconcat(upper_chart_rendered, lower_chart_rendered)
 
     charts.configure_axis(
         labelFontSize=15,

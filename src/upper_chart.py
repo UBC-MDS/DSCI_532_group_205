@@ -40,33 +40,19 @@ def create_upper_chart(df, pts, genres, ratings, year_from, year_to):
     end_year = int(year_to)
     df_year = df_rating.query('Release_Year >= @start_year and Release_Year <= @end_year').dropna()
 
-    # # register the custom theme under a chosen name
-    # alt.themes.register('mds_special', theme.mds_special)
-
-    # # enable the newly registered theme
-    # alt.themes.enable('mds_special')
-
-    # # Filter data as per user preference
-    # df["year"] = df.Release_Date.apply(lambda x: x.year)
-    # release_years = list(range(int(year_from), int(year_to) + 1))
-
-    # q = "Major_Genre in @genres & MPAA_Rating in @ratings & year in @release_years"
-    # df_filtered = df.copy().query(q)
-
-
     top_us_gross_df = (df_year[df_year['US_Gross']
-                              .notnull()]
-                              .sort_values("US_Gross", ascending=False)
-                              .head(10))
+                       .notnull()]
+                       .sort_values("US_Gross", ascending=False)
+                       .head(10))
 
     top_gross = alt.Chart(top_us_gross_df).transform_calculate(
         gross_revenue_per_million="datum.US_Gross/1000000"
     ).encode(
-        y = alt.Y("Title:N", title=None,
-              sort=alt.EncodingSortField(
-                  field="gross_revenue_per_million",
-                  order="descending"),
-              axis=alt.Axis(labelLimit=300)),
+        y=alt.Y("Title:N", title=None,
+                sort=alt.EncodingSortField(
+                    field="gross_revenue_per_million",
+                    order="descending"),
+                axis=alt.Axis(labelLimit=300)),
         tooltip=[alt.Tooltip("Release_Year:N",
                              title="Year"),
                  alt.Tooltip("Major_Genre:N",
@@ -77,17 +63,16 @@ def create_upper_chart(df, pts, genres, ratings, year_from, year_to):
                              title="Gross Revenue (millions)",
                              format=".2f")],
     ).properties(
-        title="Highest Grossing US Movies"
+        title="Highest Grossing US Movies",
     )
-
-    # .configure_axis(labelFontSize=15,titleFontSize=20
-    # ).configure_title(fontSize=20
-    # )
 
     top_us_gross_chart = top_gross.mark_bar(
     ).encode(
         alt.X("gross_revenue_per_million:Q", title="Gross Revenue (millions of USD)"),
-        color=alt.condition(pts, alt.Color("Title:N", legend=None), alt.ColorValue("grey"))
+        color=alt.condition(
+            pts,
+            alt.Color("Title:O", scale=alt.Scale(scheme="set1"), legend=None),
+            alt.ColorValue("grey"))
     ).add_selection(pts)
 
     return top_us_gross_chart.interactive()

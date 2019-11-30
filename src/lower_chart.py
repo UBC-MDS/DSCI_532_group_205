@@ -52,7 +52,10 @@ def create_lower_chart(df, pts, genres, ratings, year_from, year_to):
                                        opacity=1).encode(
         alt.X("IMDB_Rating:Q"),
         alt.Y("Rotten_Tomatoes_Rating:Q"),
-        color=alt.condition(pts, alt.Color("Title:O", scale=alt.Scale(scheme="set1"), legend=None), alt.ColorValue("grey")),
+        color=alt.condition(
+            pts,
+            alt.Color("Title:O", scale=alt.Scale(scheme="set1"), legend=None),
+            alt.ColorValue("grey")),
         tooltip=alt.Tooltip(["IMDB_Rating", "Rotten_Tomatoes_Rating", "Title"])
     ).interactive()
 
