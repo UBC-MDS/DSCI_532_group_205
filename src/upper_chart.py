@@ -37,7 +37,7 @@ def create_upper_chart(df, genres, ratings, year_from, year_to):
     # filtering df_rating based on the year range
     start_year = int(year_from)
     end_year = int(year_to)
-    df_year = df_rating.query('Release_Year >= @start_year and Release_Year <= @end_year')
+    df_year = df_rating.query('Release_Year >= @start_year and Release_Year <= @end_year').dropna()
     
     # # register the custom theme under a chosen name
     # alt.themes.register('mds_special', theme.mds_special)
