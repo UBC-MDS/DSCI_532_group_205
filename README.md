@@ -9,3 +9,17 @@ Based on the selection made by the user, the app will find the top 10 grossing U
 
 ## Sketch of the app
 !["sketch"](img/app_sketch.png) 
+
+## Link to the dployed app:  
+https://dsci-532-group-205-milestone2.herokuapp.com/  
+
+## Functionalities of the app  
+1. The app shows the top 10 grossing US movies and the IMDB and Rotten Tomatoes ratings,  filtered by genre, rating and release year specified by the user.   
+2. Users can select one or more genres from the left panel.
+3. Users can select one or more ratings from the left panel.  
+4. Users can select a range of years for the movie release years.  
+5. Plots will be updated as per the selection by the user. 
+6. Barchart shows the gross revenues of the top 10 movies.  
+7. The scatterplot shows the  IMDB and Rotten Tomatoes ratings of all movies in the database, with the top 10 movies highlighted with colours matching the bars on the bar chart.  
+8. Both plots are interactive. It can zoom and pan. Also, tooltips show relevant information.  
+9. Users can click on a bar in the bar chart and the respective movie in the scatterplot will be highlighted. This helps the user to compare the rating of his chosen movie to other movies.  
