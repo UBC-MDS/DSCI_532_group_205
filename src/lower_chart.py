@@ -34,7 +34,7 @@ def create_lower_chart(df, genres, ratings, year_from, year_to):
     release_years = list(range(int(year_from), int(year_to) + 1))
 
     q = "Major_Genre in @genres & MPAA_Rating in @ratings & year in @release_years"
-    df_filtered = df.copy().query(q)
+    df_filtered = df.copy().query(q).dropna()
 
     # Get top 20 grossing movies
     top_us_gross_df = df_filtered.sort_values("US_Gross", ascending=False)
@@ -47,16 +47,16 @@ def create_lower_chart(df, genres, ratings, year_from, year_to):
 	    alt.Y("Rotten_Tomatoes_Rating:Q", title="Rotten Tomatoes Rating"),
 	     alt.Tooltip(["IMDB_Rating", "Rotten_Tomatoes_Rating"])).interactive().properties(
 	    title = "Movie Ratings",
-	    width=340,
+	    width=500,
 	    height=200)
 
     p2 = alt.Chart(top_10).mark_circle(size = 200,
                                   opacity=1).encode(
 	    alt.X("IMDB_Rating:Q"),
 	    alt.Y("Rotten_Tomatoes_Rating:Q"),
-	    alt.Color("Title:O", scale=alt.Scale(scheme="set3")),
+	    alt.Color("Title:N", scale=alt.Scale(scheme="set3"), legend=None),
 	    alt.Tooltip(["IMDB_Rating", "Rotten_Tomatoes_Rating", "Title"])).interactive().properties(
-	    width=340,
+	    width=500,
 	    height=200)
 
     combined_scatter = (p1 + p2).configure_axis(
