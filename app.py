@@ -44,9 +44,16 @@ years = sorted(list(df["Release_Year"].dropna().astype(str).unique()))
 # App layout
 #
 app.layout = html.Div([
-    dbc.Jumbotron(
-        [html.H1("Seek-a-Movie", className="display-3", style={"background-color":"blue"})
-        ]
+    dbc.Row(
+        [html.H1("Seek-a-Movie", className="display-3"),
+        html.P("Interactive Movie Selector",
+        className="lead"),
+        html.P("Displays the top 10 highest grossing US movies based on your taste.",
+        className="lead"),
+        html.P("Compare the IMDB and Rotten Tomatoes ratings to help you decide what to watch!",
+        className="lead"),
+        ],
+        className="app-main--first-title",
     ),
     html.Div([
         html.Div([
@@ -110,7 +117,7 @@ app.layout = html.Div([
                             srcDoc="")
             ], className="app-main--panel-right-lower")
         ], className="app-main--panel-right")
-    ], className="app-main--container")
+    ], className="app-main--container"),
 ], className="wrapper")
 
 #
