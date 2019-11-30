@@ -39,6 +39,11 @@ genres = sorted(list(df["Major_Genre"].dropna().unique()))
 ratings = ["G", "PG", "PG-13", "R", "NC-17", "Open", "None"]
 years = sorted(list(df["Release_Year"].dropna().astype(str).unique()))
 
+#
+# Default values for filters
+#
+default_genres = ["Action", "Adventure", "Comedy", "Drama", "Horror", "Romantic Comedy", "Thriller/Suspense"]
+default_ratings = ["PG", "PG-13", "R"]
 
 #
 # App layout
@@ -65,7 +70,7 @@ app.layout = html.Div([
                     inputClassName="app-main--cb-input",
                     labelClassName="app-main--cb-label",
                     options=[{"label": genre, "value": genre} for genre in genres],
-                    value=[ ]
+                    value=default_genres
                 )
             ], className="app-main--genre-container app-main--filter-panel"),
             html.Div([
@@ -76,7 +81,7 @@ app.layout = html.Div([
                     inputClassName="app-main--cb-input",
                     labelClassName="app-main--cb-label",
                     options=[{"label": rating, "value": rating} for rating in ratings],
-                    value=[]
+                    value=default_ratings
                 )
             ], className="app-main--rating-container  app-main--filter-panel"),
             html.Div([
