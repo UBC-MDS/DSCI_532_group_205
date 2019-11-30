@@ -140,14 +140,14 @@ def update_charts(genre, rating, year_from, year_to):
         movies_df, pts, genre, rating, year_from, year_to
     ).properties(
         width=400,
-        height=250
+        height=280
     )
 
     lower_chart_rendered = lower_chart.create_lower_chart(
         movies_df, pts, genre, rating, year_from, year_to
     ).properties(
         width=400,
-        height=250
+        height=220
     )
 
     charts = alt.vconcat(upper_chart_rendered, lower_chart_rendered)
