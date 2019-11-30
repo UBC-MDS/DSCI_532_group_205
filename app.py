@@ -10,9 +10,9 @@ from dash.dependencies import Input, Output
 from src import lower_chart
 from src import upper_chart
 
-
 app = dash.Dash(__name__, assets_folder='assets')
 server = app.server
+
 
 def get_data():
     df = vega_datasets.data.movies()
@@ -45,19 +45,21 @@ years = sorted(list(df["Release_Year"].dropna().astype(str).unique()))
 default_genres = ["Action", "Adventure", "Comedy", "Drama", "Horror", "Romantic Comedy", "Thriller/Suspense"]
 default_ratings = ["PG", "PG-13", "R"]
 
+pts = alt.selection(type="single", encodings=['y'], fields=["Title"])
+
 #
 # App layout
 #
 app.layout = html.Div([
     dbc.Row(
         [html.H1("Seek-a-Movie", className="display-3"),
-        html.P("Interactive Movie Selector",
-        className="lead"),
-        html.P("Displays the top 10 highest grossing US movies based on your taste.",
-        className="lead"),
-        html.P("Compare the IMDB and Rotten Tomatoes ratings to help you decide what to watch!",
-        className="lead"),
-        ],
+         html.P("Interactive Movie Selector",
+                className="lead"),
+         html.P("Displays the top 10 highest grossing US movies based on your taste.",
+                className="lead"),
+         html.P("Compare the IMDB and Rotten Tomatoes ratings to help you decide what to watch!",
+                className="lead"),
+         ],
         className="app-main--first-title",
     ),
     html.Div([
@@ -107,36 +109,50 @@ app.layout = html.Div([
         html.Div([
             html.Div([
                 html.Iframe(sandbox="allow-scripts",
-                            id="chart_upper",
+                            id="chart",
                             height="100%",
                             width="100%",
                             className="upper-chart--iframe",
                             srcDoc="")
-            ], className="app-main--panel-right-upper"),
-            html.Div([
-                html.Iframe(sandbox="allow-scripts",
-                            id="chart_lower",
-                            height="100%",
-                            width="100%",
-                            className="lower-chart--iframe",
-                            srcDoc="")
-            ], className="app-main--panel-right-lower")
+            ], className="app-main--panel-right-upper")
         ], className="app-main--panel-right")
     ], className="app-main--container"),
 ], className="wrapper")
 
+
 #
 # Update charts when any of the filters are changed
 #
-@app.callback([dash.dependencies.Output("chart_upper", "srcDoc"),
-               dash.dependencies.Output("chart_lower", "srcDoc")],
+@app.callback(dash.dependencies.Output("chart", "srcDoc"),
               [dash.dependencies.Input("cb-genres", "value"),
                dash.dependencies.Input("cb-ratings", "value"),
                dash.dependencies.Input("dd-year-from", "value"),
                dash.dependencies.Input("dd-year-to", "value")])
 def update_charts(genre, rating, year_from, year_to):
-    return (upper_chart.create_upper_chart(df, genre, rating, year_from, year_to).to_html(),
-            lower_chart.create_lower_chart(df, genre, rating, year_from, year_to).to_html())
+    upper_chart_rendered = upper_chart.create_upper_chart(df, pts, genre, rating, year_from, year_to)
+    lower_chart_rendered = lower_chart.create_lower_chart(df, pts, genre, rating, year_from, year_to)
+
+    upper_chart_rendered.properties(
+        width=350,
+        height=155
+    )
+
+    lower_chart_rendered.properties(
+        width=400,
+        height=200
+    )
+
+    charts = alt.vconcat(upper_chart_rendered, lower_chart_rendered, center=True)
+
+    charts.configure_axis(
+        labelFontSize=15,
+        titleFontSize=20
+    ).configure_title(
+        fontSize=20
+    )
+
+    return charts.to_html()
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
