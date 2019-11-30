@@ -53,7 +53,7 @@ app.layout = html.Div([
         html.P("Compare the IMDB and Rotten Tomatoes ratings to help you decide what to watch!",
         className="lead"),
         ],
-        style={"background-color":"#396362", "color":"white", "padding":"5px", "border-radius": "0px"},
+        className="app-main--first-title",
     ),
     html.Div([
         html.Div([
@@ -67,7 +67,7 @@ app.layout = html.Div([
                     options=[{"label": genre, "value": genre} for genre in genres],
                     value=[ ]
                 )
-            ], className="app-main--genre-container app-main--filter-panel", style={"border-radius": "0px"}),
+            ], className="app-main--genre-container app-main--filter-panel"),
             html.Div([
                 html.P("MPAA Ratings", className="app-main--container-title"),
                 dcc.Checklist(
@@ -78,7 +78,7 @@ app.layout = html.Div([
                     options=[{"label": rating, "value": rating} for rating in ratings],
                     value=[]
                 )
-            ], className="app-main--rating-container  app-main--filter-panel", style={"border-radius": "0px"}),
+            ], className="app-main--rating-container  app-main--filter-panel"),
             html.Div([
                 html.P("Release Year", className="app-main--container-title"),
                 html.Div([
@@ -97,8 +97,8 @@ app.layout = html.Div([
                                      className="app-main--dropdown")
                     ], className="app-main--dropdown-wrapper")
                 ], className="app-main--year-selector")
-            ], className="app-main--year-container app-main--filter-panel", style={"border-radius": "0px"})
-        ], className="app-main--panel-left", style={"border-radius": "0px"}),
+            ], className="app-main--year-container app-main--filter-panel")
+        ], className="app-main--panel-left"),
         html.Div([
             html.Div([
                 html.Iframe(sandbox="allow-scripts",
@@ -115,9 +115,9 @@ app.layout = html.Div([
                             width="100%",
                             className="lower-chart--iframe",
                             srcDoc="")
-            ], className="app-main--panel-right-lower", style={"border-radius": "0px"})
-        ], className="app-main--panel-right", style={"border-radius": "0px"})
-    ], className="app-main--container", style={"border-radius": "0px"},),
+            ], className="app-main--panel-right-lower")
+        ], className="app-main--panel-right")
+    ], className="app-main--container"),
 ], className="wrapper")
 
 #

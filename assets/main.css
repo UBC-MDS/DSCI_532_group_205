@@ -31,7 +31,7 @@ P {
 
 .app-main--container {
   border: 1px solid black;
-  border-radius: 10px;
+  border-radius: 0px;
   display: flex;
 }
 
@@ -61,7 +61,7 @@ P {
 .app-main--filter-panel {
     background-color: lightgrey;
     padding: 0 10px;
-    border-radius: 10px;
+    border-radius: 0px;
     margin: 6px 0;
 }
 
@@ -102,4 +102,10 @@ P {
 
 .app-main--cb-label {
     padding: 6px 0;
+}
+
+.app-main--first-title {
+    background-color: #396362;
+    color: white;
+    padding: 5px;
 }
