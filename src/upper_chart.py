@@ -35,9 +35,15 @@ def create_upper_chart(df, pts, genres, ratings, year_from, year_to):
     # filtering df_genre based on rating
     df_rating = df_genre[df_genre.MPAA_Rating.isin(ratings)]
 
-    # filtering df_rating based on the year range
+    # convert years to int
     start_year = int(year_from)
     end_year = int(year_to)
+
+    # Check the year range
+    if start_year > end_year:
+         start_year, end_year = end_year,  start_year
+
+    # filtering df_rating based on the year range    
     df_year = df_rating.query('Release_Year >= @start_year and Release_Year <= @end_year').dropna()
 
     top_us_gross_df = (df_year[df_year['US_Gross']
