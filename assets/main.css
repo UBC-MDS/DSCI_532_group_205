@@ -116,3 +116,11 @@ P {
     color: white;
     padding: 10px;
 }
+
+.app-main--highlight {
+    color: red;
+    text-align: center;
+    margin-top: 2em;
+    font-weight: bold;
+    font-size: 20px;
+}

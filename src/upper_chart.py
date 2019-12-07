@@ -77,8 +77,8 @@ def create_upper_chart(df, pts, genres, ratings, year_from, year_to):
         alt.X("gross_revenue_per_million:Q", title="Gross Revenue (millions of USD)"),
         color=alt.condition(
             pts,
-            alt.Color("Title:O", scale=alt.Scale(scheme="set1"), legend=None),
+            alt.Color("Title:O", scale=alt.Scale(range=["#d1720d", "#d1720d"]), legend=None),
             alt.ColorValue("grey"))
     ).add_selection(pts)
 
-    return top_us_gross_chart.interactive()
+    return top_us_gross_chart

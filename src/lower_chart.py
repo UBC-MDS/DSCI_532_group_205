@@ -47,18 +47,20 @@ def create_lower_chart(df, pts, genres, ratings, year_from, year_to):
     top_10["rank"] = top_10.index + 1
 
     p1 = alt.Chart(df).mark_circle(opacity=0.4).encode(
-
         alt.X("IMDB_Rating:Q", title="IMDB Rating"),
         alt.Y("Rotten_Tomatoes_Rating:Q", title="Rotten Tomatoes Rating"),
-        alt.Tooltip(["IMDB_Rating", "Rotten_Tomatoes_Rating"])).interactive()
+        alt.Tooltip(["IMDB_Rating", "Rotten_Tomatoes_Rating"]))
 
     p2 = alt.Chart(top_10).mark_circle(size=200,
                                        opacity=1).encode(
         alt.X("IMDB_Rating:Q"),
         alt.Y("Rotten_Tomatoes_Rating:Q"),
-        
+        color=alt.condition(
+            pts,
+            alt.Color("Title:O", scale=alt.Scale(range=["#d1720d", "#d1720d"]), legend=None),
+            alt.ColorValue("grey")),        
         tooltip=alt.Tooltip(["IMDB_Rating", "Rotten_Tomatoes_Rating", "Title"])
-    ).interactive()
+    )
 
     combined_scatter = (p1 + p2).properties(
         title="Movie Ratings")

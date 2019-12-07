@@ -119,6 +119,8 @@ app.layout = html.Div([
             ], className="app-main--year-container app-main--filter-panel")
         ], className="app-main--panel-left"),
         html.Div([
+                html.P("Click on a bar to select a movie",
+                className="app-main--highlight"),
             html.Div([
                 html.Iframe(sandbox="allow-scripts",
                             id="chart",
