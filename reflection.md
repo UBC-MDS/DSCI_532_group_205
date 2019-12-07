@@ -56,15 +56,15 @@ Based on the feedback, we decided to prioritize improvements based on trying to 
 * Displaying a friendly user message when filter selection lead to no results. Though this was a nice-to-have, it didn't prevent the user from being able to use the app so didn't make it very high in the priority list. This also required HTML class attribute manipulation and was unsure if it would require JavaScript or if Dash could handle this. Some investigation would need to be done.
 * Actual improvements to the charts themselves needed some deeper thinking. There were some users that wanted to be able to select the faded point on the scatterplot that represented all other movies. Later discussion with the TA revealed that we should think about removing them completely as there was too much overplotting. We will have greter discussions about this in the coming week so didn't think it would be wise to rush into making any major changes in this area for milestone 3.
 
-## App Maintenance
+## Summary of Changes for Milestone 3
 
-### Moving app.py into src folder
+* App Maintenance: moving app.py into src folder: We attempted to move the `app.py` file into the `src/` folder. However, this affected the way that functions were imported. Python expects imports to come from a module and files of a module must be in a separate folder. At this point, since we only have one `.py` file in the root of the project folder, we opted to leave as is for now as we rethink how we'd like to restucture the project in the future.
+* MPAA ratings now have a legend. Open and None ratings were removed.
 
-We attempted to move the `app.py` file into the `src/` folder. However, this affected the way that functions were imported. Python expects imports to come from a module and files of a module must be in a separate folder. At this point, since we only have one `.py` file in the root of the project folder, we opted to leave as is for now as we rethink how we'd like to restucture the project in the future.
-
-## Milestone 3 Improvements
-
-
+## Ongoing issues
+* Year Selection: We attempted to work around year validation by swapping the variables when start year was greater than end year. This worked on a local instance but doesn't seem to be working on the deployed Heroku app. (Issue #33)
+* Message when there is nothing to plot: we starting working on this issue but was not able to complete this for milestone 3. (Issue #40)
+* We are still determining how to improve the charts
 
 ## TA Feedback
 
