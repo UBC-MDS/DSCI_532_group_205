@@ -144,14 +144,14 @@ def update_charts(genre, rating, year_from, year_to):
     upper_chart_rendered = upper_chart.create_upper_chart(
         movies_df, pts, genre, rating, year_from, year_to
     ).properties(
-        width=400,
+        width=500,
         height=280
     )
 
     lower_chart_rendered = lower_chart.create_lower_chart(
         movies_df, pts, genre, rating, year_from, year_to
     ).properties(
-        width=400,
+        width=500,
         height=220
     )
 
