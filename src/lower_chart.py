@@ -30,6 +30,10 @@ def create_lower_chart(df, pts, genres, ratings, year_from, year_to):
     # enable the newly registered theme
     alt.themes.enable('mds_special')
 
+    # Check the year range
+    if year_from > year_to:
+        year_from, year_to = year_to, year_from
+
     # Filter data as per user preference
     df["year"] = df.Release_Date.apply(lambda x: x.year)
     release_years = list(range(int(year_from), int(year_to) + 1))
