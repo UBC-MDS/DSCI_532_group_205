@@ -41,7 +41,7 @@ app.title = "Seek-a-Movie"
 #
 movies_df = get_data()
 genres = sorted(list(movies_df["Major_Genre"].dropna().unique()))
-ratings = ["G", "PG", "PG-13", "R", "NC-17", "Open", "None"]
+ratings = ["G", "PG", "PG-13", "R", "NC-17"]
 years = sorted(list(movies_df["Release_Year"].dropna().astype(str).unique()))
 
 #
@@ -89,7 +89,12 @@ app.layout = html.Div([
                     labelClassName="app-main--cb-label",
                     options=[{"label": rating, "value": rating} for rating in ratings],
                     value=default_ratings
-                )
+                ),
+                html.P("G: general audience", className="app-main--container-title"),
+                html.P("PG: parental guidance suggested", className="app-main--container-title"),
+                html.P("PG-13: parents strongly cautioned", className="app-main--container-title"),
+                html.P("R: restricted", className="app-main--container-title"),
+                html.P("NC-17: adults only", className="app-main--container-title")
             ], className="app-main--rating-container  app-main--filter-panel"),
             html.Div([
                 html.P("Release Year", className="app-main--container-title"),
